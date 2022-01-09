@@ -8,8 +8,9 @@ namespace Tangents
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        private KeyboardState prevKeyState;
 
-        Circle circle;
+        Circle circle1, circle2;
         Player player;
 
         public Tangents()
@@ -33,14 +34,23 @@ namespace Tangents
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetManager.Load(Content);
-            circle = new Circle(AssetManager.Circle, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
-            player = new Player(AssetManager.Player, new Vector2(circle.position.X, circle.position.Y - circle.size.Y / 2f + circle.thickness / 2f), circle);
+            circle1 = new Circle(AssetManager.Circle, new Vector2(graphics.PreferredBackBufferWidth / 4, graphics.PreferredBackBufferHeight / 2));
+            player = new Player(AssetManager.Player, circle1);
+            circle2 = new Circle(AssetManager.Circle, new Vector2(3 * graphics.PreferredBackBufferWidth / 4, graphics.PreferredBackBufferHeight / 2));
         }
 
         protected override void Update(GameTime gameTime)
         {
+            // input
+            KeyboardState newKeyState = Keyboard.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (prevKeyState.IsKeyUp(Keys.Space) && newKeyState.IsKeyDown(Keys.Space)) {
+                player.isOribiting = !player.isOribiting;
+            }
+
+            prevKeyState = newKeyState;
 
             player.Update(gameTime);
 
@@ -53,7 +63,8 @@ namespace Tangents
             spriteBatch.Begin();
 
             spriteBatch.Draw(AssetManager.BG, new Vector2(0, 0), Color.White);
-            circle.Draw(gameTime, spriteBatch);
+            circle1.Draw(gameTime, spriteBatch);
+            circle2.Draw(gameTime, spriteBatch);
             player.Draw(gameTime, spriteBatch);
 
             spriteBatch.End();
