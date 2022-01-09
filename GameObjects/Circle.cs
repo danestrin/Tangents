@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Tangents
 {
@@ -18,9 +19,19 @@ namespace Tangents
             this.position = position;
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Player player)
         {
-            // TODO
+            this.HandleCollision(player);
+        }
+
+        private void HandleCollision(Player player)
+        {
+            if (!player.isOrbiting && player.attachedCircle != this) {
+                if (Vector2.Distance(this.position, player.position) <= this.radius) {
+                    player.attachedCircle = this;
+                    player.isOrbiting = true;
+                }
+            }
         }
     }
 }

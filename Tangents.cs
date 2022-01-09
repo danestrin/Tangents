@@ -47,12 +47,14 @@ namespace Tangents
                 Exit();
 
             if (prevKeyState.IsKeyUp(Keys.Space) && newKeyState.IsKeyDown(Keys.Space)) {
-                player.isOribiting = !player.isOribiting;
+                player.isOrbiting = !player.isOrbiting;
             }
 
             prevKeyState = newKeyState;
 
             player.Update(gameTime);
+            circle1.Update(gameTime, player);
+            circle2.Update(gameTime, player);
 
             base.Update(gameTime);
         }

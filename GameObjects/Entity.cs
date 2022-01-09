@@ -16,8 +16,6 @@ namespace Tangents
             }
         }
 
-        public abstract void Update(GameTime gametime);
-
         public virtual void Draw(GameTime gametime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(image, position, null, Color.White, 0f, size / 2f, 1, 0, 0);
