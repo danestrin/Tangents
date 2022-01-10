@@ -47,7 +47,7 @@ namespace Tangents
                 Exit();
 
             if (prevKeyState.IsKeyUp(Keys.Space) && newKeyState.IsKeyDown(Keys.Space)) {
-                player.isOrbiting = !player.isOrbiting;
+                player.IsOrbiting = !player.IsOrbiting;
             }
 
             prevKeyState = newKeyState;

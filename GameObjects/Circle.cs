@@ -6,8 +6,14 @@ namespace Tangents
 {
     class Circle : Entity
     {
-        public float thickness = 8;
-        public float radius
+        public float thickness
+        {
+            get {
+                return 8f;
+            }
+        }
+
+        public float Radius
         {
             get {
                 return this.image.Width / 2f - thickness / 2f;
@@ -16,7 +22,7 @@ namespace Tangents
         public Circle(Texture2D image, Vector2 position)
         {
             this.image = image;
-            this.position = position;
+            this.Position = position;
         }
 
         public void Update(GameTime gameTime, Player player)
@@ -26,10 +32,10 @@ namespace Tangents
 
         private void HandleCollision(Player player)
         {
-            if (!player.isOrbiting && player.attachedCircle != this) {
-                if (Vector2.Distance(this.position, player.position) <= this.radius) {
+            if (!player.IsOrbiting && player.attachedCircle != this) {
+                if (Vector2.Distance(this.Position, player.Position) <= this.Radius) {
                     player.attachedCircle = this;
-                    player.isOrbiting = true;
+                    player.IsOrbiting = true;
                 }
             }
         }

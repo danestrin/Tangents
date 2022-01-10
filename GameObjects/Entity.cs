@@ -7,8 +7,8 @@ namespace Tangents
     {
         protected Texture2D image;
 
-        public Vector2 position;
-        public Vector2 size
+        public Vector2 Position { get; set; }
+        public Vector2 Size
         {
             get
             {
@@ -18,7 +18,7 @@ namespace Tangents
 
         public virtual void Draw(GameTime gametime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(image, position, null, Color.White, 0f, size / 2f, 1, 0, 0);
+            spriteBatch.Draw(image, this.Position, null, Color.White, 0f, this.Size / 2f, 1, 0, 0);
         }
     }
 }
