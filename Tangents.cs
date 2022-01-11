@@ -8,10 +8,9 @@ namespace Tangents
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private KeyboardState prevKeyState;
-
-        Circle circle1, circle2;
-        Player player;
+        private int width;
+        private int height;
+        private GameStateManager gameStateManager;
 
         public Tangents()
         {
@@ -26,6 +25,11 @@ namespace Tangents
             graphics.PreferredBackBufferHeight = 540;
             graphics.ApplyChanges();
 
+            this.width = graphics.PreferredBackBufferWidth;
+            this.height = graphics.PreferredBackBufferHeight;
+
+            this.gameStateManager = GameStateManager.Instance;
+
             base.Initialize();
         }
 
@@ -34,42 +38,22 @@ namespace Tangents
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetManager.Load(Content);
-            circle1 = new Circle(AssetManager.Circle, new Vector2(graphics.PreferredBackBufferWidth / 4, graphics.PreferredBackBufferHeight / 2));
-            player = new Player(AssetManager.Player, circle1);
-            circle2 = new Circle(AssetManager.Circle, new Vector2(3 * graphics.PreferredBackBufferWidth / 4, graphics.PreferredBackBufferHeight / 2));
+
+            gameStateManager.GameState = new InGameState(gameStateManager, width, height);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // input
-            KeyboardState newKeyState = Keyboard.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (prevKeyState.IsKeyUp(Keys.Space) && newKeyState.IsKeyDown(Keys.Space)) {
-                player.IsOrbiting = !player.IsOrbiting;
-            }
-
-            prevKeyState = newKeyState;
-
-            player.Update(gameTime);
-            circle1.Update(gameTime, player);
-            circle2.Update(gameTime, player);
-
+            gameStateManager.GameState.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin();
-
-            spriteBatch.Draw(AssetManager.BG, new Vector2(0, 0), Color.White);
-            circle1.Draw(gameTime, spriteBatch);
-            circle2.Draw(gameTime, spriteBatch);
-            player.Draw(gameTime, spriteBatch);
-
-            spriteBatch.End();
+            gameStateManager.GameState.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }

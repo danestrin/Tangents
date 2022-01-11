@@ -4,7 +4,7 @@ using System;
 
 namespace Tangents
 {
-    class Circle : Entity
+    public class Circle : Entity
     {
         public float thickness
         {
@@ -32,9 +32,9 @@ namespace Tangents
 
         private void HandleCollision(Player player)
         {
-            if (!player.IsOrbiting && player.attachedCircle != this) {
+            if (!player.IsOrbiting && player.AttachedCircle != this) {
                 if (Vector2.Distance(this.Position, player.Position) <= this.Radius) {
-                    player.attachedCircle = this;
+                    player.AttachedCircle = this;
                     player.IsOrbiting = true;
                 }
             }
