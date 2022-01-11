@@ -28,18 +28,15 @@ namespace Tangents
             this.width = graphics.PreferredBackBufferWidth;
             this.height = graphics.PreferredBackBufferHeight;
 
-            this.gameStateManager = GameStateManager.Instance;
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             AssetManager.Load(Content);
 
-            gameStateManager.GameState = new InGameState(gameStateManager, width, height);
+            LoadGameStates();
         }
 
         protected override void Update(GameTime gameTime)
@@ -47,14 +44,23 @@ namespace Tangents
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            gameStateManager.GameState.Update(gameTime);
+            gameStateManager.CurrentGameState.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            gameStateManager.GameState.Draw(gameTime, spriteBatch);
+            gameStateManager.CurrentGameState.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
+        }
+
+        private void LoadGameStates()
+        {
+            this.gameStateManager = GameStateManager.Instance;
+            gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.InGame, new InGameState(gameStateManager, width, height));
+            gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.GameOver, new GameOverState(gameStateManager, width, height));
+
+            gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame];
         }
     }
 }

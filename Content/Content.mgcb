@@ -37,6 +37,13 @@
 /processorParam:TextureFormat=Color
 /build:circle.png
 
+#begin Header.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Header.spritefont
+
 #begin player.png
 /importer:TextureImporter
 /processor:TextureProcessor

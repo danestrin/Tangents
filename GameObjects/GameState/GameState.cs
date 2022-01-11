@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Tangents
 {
@@ -8,6 +9,7 @@ namespace Tangents
         protected GameStateManager gameStateManager;
         protected int width;
         protected int height;
+        protected KeyboardState prevKeyState;
 
         public abstract void OnBegin();
 

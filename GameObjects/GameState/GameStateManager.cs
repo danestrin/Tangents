@@ -1,15 +1,37 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Tangents
 {
     public class GameStateManager
     {
         private static GameStateManager instance;
+        private GameState currentGameState;
+        private GameState prevGameState;
 
-        private GameStateManager() {}
+        private GameStateManager()
+        {
+            GameStateMap = new Dictionary<GameStateID, GameState>();
+        }
 
-        public GameState GameState { get; set; }
+        public GameState CurrentGameState {
+            get
+            {
+                return currentGameState;
+            }
+            set
+            {
+                if (currentGameState != null)
+                {
+                    this.prevGameState = currentGameState;
+                    this.prevGameState.OnEnd();
+                }
+
+                this.currentGameState = value;
+                this.currentGameState.OnBegin();
+            }
+        }
+
+        public Dictionary<GameStateID, GameState> GameStateMap { get; set; }
 
         public static GameStateManager Instance
         {
@@ -21,6 +43,12 @@ namespace Tangents
 
                 return instance;
             }
+        }
+
+        public enum GameStateID
+        {
+            InGame,
+            GameOver
         }
     }
 }
