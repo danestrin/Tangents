@@ -56,3 +56,10 @@
 /processorParam:TextureFormat=Color
 /build:player.png
 
+#begin SubHeader.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SubHeader.spritefont
+

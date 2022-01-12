@@ -10,6 +10,7 @@ namespace Tangents
         public static Texture2D Circle { get; private set; }
         public static Texture2D Player { get; private set; }
         public static SpriteFont Header { get; private set; }
+        public static SpriteFont SubHeader { get; private set; }
 
         public static void Load(ContentManager content)
         {
@@ -17,6 +18,7 @@ namespace Tangents
             Circle = content.Load<Texture2D>("circle");
             Player = content.Load<Texture2D>("player");
             Header = content.Load<SpriteFont>("Header");
+            SubHeader = content.Load<SpriteFont>("SubHeader");
         }
     }
 }

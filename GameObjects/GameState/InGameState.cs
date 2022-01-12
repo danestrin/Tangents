@@ -34,7 +34,7 @@ namespace Tangents
             KeyboardState newKeyState = Keyboard.GetState();
 
             if (prevKeyState.IsKeyUp(Keys.Space) && newKeyState.IsKeyDown(Keys.Space)) {
-                player.IsOrbiting = !player.IsOrbiting;
+                player.IsOrbiting = false;
             }
 
             prevKeyState = newKeyState;
