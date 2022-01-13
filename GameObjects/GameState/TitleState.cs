@@ -26,7 +26,7 @@ namespace Tangents
             subtitleMidPoint = AssetManager.SubHeader.MeasureString(subtitleString) / 2;
             startMidPoint = AssetManager.SubHeader.MeasureString(startString) / 2;
             titlePos = new Vector2(width / 2, height / 3);
-            subtitlePos = new Vector2(width / 2, height / 2);
+            subtitlePos = new Vector2(width / 2, 17 * height / 36);
             startPos = new Vector2(width / 2, 3 * height / 4);
 
         }
