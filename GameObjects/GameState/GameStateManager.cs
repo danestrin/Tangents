@@ -47,6 +47,7 @@ namespace Tangents
 
         public enum GameStateID
         {
+            Title,
             InGame,
             GameOver
         }

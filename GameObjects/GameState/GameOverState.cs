@@ -5,8 +5,6 @@ using Microsoft.Xna.Framework.Input;
 namespace Tangents
 {    public class GameOverState : GameState
     {
-        private SpriteFont header;
-        private SpriteFont subHeader;
         private string gameOverString = "GAME OVER";
         private string gameOverSubString = "Press SPACE to play again!";
         private Vector2 gameOverMidPoint;
@@ -20,12 +18,10 @@ namespace Tangents
             this.width = width;
             this.height = height;
 
-            this.header = AssetManager.Header;
-            this.subHeader = AssetManager.SubHeader;
-            this.gameOverMidPoint = header.MeasureString(gameOverString) / 2;
-            this.gameOverSubMidPoint = subHeader.MeasureString(gameOverSubString) / 2;
+            this.gameOverMidPoint = AssetManager.Header.MeasureString(gameOverString) / 2;
+            this.gameOverSubMidPoint = AssetManager.SubHeader.MeasureString(gameOverSubString) / 2;
             this.gameOverPos = new Vector2(width / 2, height / 3);
-            this.gameOverSubPos = new Vector2(width / 2, 2 * height / 3);
+            this.gameOverSubPos = new Vector2(width / 2, 3* height / 4);
         }
 
         public override void OnBegin()
@@ -53,8 +49,8 @@ namespace Tangents
 
             spriteBatch.Draw(AssetManager.BG, new Vector2(0, 0), Color.White);
 
-            spriteBatch.DrawString(header, gameOverString, gameOverPos, Color.Red, 0, gameOverMidPoint, 1.0f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(subHeader, gameOverSubString, gameOverSubPos, Color.Red, 0, gameOverSubMidPoint, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(AssetManager.Header, gameOverString, gameOverPos, Color.Red, 0, gameOverMidPoint, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(AssetManager.SubHeader, gameOverSubString, gameOverSubPos, Color.Red, 0, gameOverSubMidPoint, 1.0f, SpriteEffects.None, 0.5f);
 
             spriteBatch.End();
         }

@@ -57,10 +57,11 @@ namespace Tangents
         private void LoadGameStates()
         {
             this.gameStateManager = GameStateManager.Instance;
+            gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.Title, new TitleState(gameStateManager, width, height));
             gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.InGame, new InGameState(gameStateManager, width, height));
             gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.GameOver, new GameOverState(gameStateManager, width, height));
 
-            gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame];
+            gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.Title];
         }
     }
 }
