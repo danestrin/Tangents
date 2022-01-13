@@ -6,19 +6,8 @@ namespace Tangents
 {
     public class Circle : Entity
     {
-        public float thickness
-        {
-            get {
-                return 8f;
-            }
-        }
+        private float speed = 200f;
 
-        public float Radius
-        {
-            get {
-                return this.image.Width / 2f - thickness / 2f;
-            }
-        }
         public Circle(Texture2D image, Vector2 position)
         {
             this.image = image;
@@ -27,6 +16,7 @@ namespace Tangents
 
         public void Update(GameTime gameTime, Player player)
         {
+            Position = new Vector2(Position.X - (float) gameTime.ElapsedGameTime.TotalSeconds * speed, Position.Y);
             this.HandleCollision(player);
         }
 

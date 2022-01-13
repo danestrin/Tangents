@@ -7,6 +7,22 @@ namespace Tangents
     {
         protected Texture2D image;
 
+        public float Thickness
+        {
+            get
+            {
+                return 8f;
+            }
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return this.image.Width / 2f - Thickness / 2f;
+            }
+        }
+
         public Vector2 Position { get; set; }
         public Vector2 Size
         {
