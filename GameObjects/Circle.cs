@@ -22,11 +22,20 @@ namespace Tangents
 
         private void HandleCollision(Player player)
         {
-            if (!player.IsOrbiting && player.AttachedCircle != this) {
-                if (Vector2.Distance(this.Position, player.Position) <= this.Radius) {
-                    player.AttachedCircle = this;
-                    player.IsOrbiting = true;
+            if (!player.IsOrbiting) {
+                if (player.AttachedCircle != this) {
+                    if (Vector2.Distance(this.Position, player.Position) <= this.Radius)
+                    {
+                        player.AttachedCircle = this;
+                        player.IsOrbiting = true;
+                    }
+                } else {
+                    // need to detach the player's current circle, but only once the player is far enough away so there's no interference when collision checking
+                    if (Vector2.Distance(this.Position, player.Position) >= this.Radius + player.Radius) {
+                        player.AttachedCircle = null;
+                    }
                 }
+
             }
         }
     }
