@@ -8,6 +8,8 @@ namespace Tangents
     {
         private float speed = 200f;
 
+        public event EventHandler PlayerAttached;
+
         public Circle(Texture2D image, Vector2 position)
         {
             this.image = image;
@@ -20,6 +22,13 @@ namespace Tangents
             this.HandleCollision(player);
         }
 
+        public void OnPlayerAttached()
+        {
+            if (PlayerAttached != null) {
+                PlayerAttached(this, EventArgs.Empty);
+            }
+        }
+
         private void HandleCollision(Player player)
         {
             if (!player.IsOrbiting) {
@@ -28,6 +37,7 @@ namespace Tangents
                     {
                         player.AttachedCircle = this;
                         player.IsOrbiting = true;
+                        OnPlayerAttached();
                     }
                 } else {
                     // need to detach the player's current circle, but only once the player is far enough away so there's no interference when collision checking

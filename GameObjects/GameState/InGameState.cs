@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 namespace Tangents
 {
@@ -12,6 +13,11 @@ namespace Tangents
         private Random random;
         private int circleUpperBound;
         private int circleLowerBound;
+        private float scoreStringHeight;
+
+        public int Score { get; private set; }
+
+        public Vector2 ScoreStringPos { get; private set; }
 
         public InGameState(GameStateManager gameStateManager, int width, int height)
         {
@@ -19,21 +25,30 @@ namespace Tangents
             this.height = height;
             this.gameStateManager = gameStateManager;
 
+            ScoreStringPos = new Vector2(this.width / 64, 0);
+            scoreStringHeight = AssetManager.SubHeader.MeasureString("Score").Y;
+
             random = new Random();
         }
 
         public override void OnBegin()
         {
+            Score = 0;
             Circle circle1 = new Circle(AssetManager.Circle, new Vector2(this.width / 2, this.height / 2));
             player = new Player(AssetManager.Player, circle1);
 
-            circleLowerBound = 0 + (int) circle1.Radius + (int)circle1.Thickness + (int) player.Radius + (int) player.Thickness;
-            circleUpperBound = height - (int)circle1.Radius - (int)circle1.Thickness - (int) player.Radius - (int) player.Thickness;
+            circleLowerBound = 0 + (int) circle1.Radius + (int) circle1.Thickness + (int) player.Radius + (int) player.Thickness;
+            circleUpperBound = height - (int) circle1.Radius - (int) circle1.Thickness - (int) player.Radius - (int) player.Thickness - (int) scoreStringHeight;
 
             Circle circle2 = new Circle(AssetManager.Circle, new Vector2(7 * this.width / 8, random.Next(circleLowerBound, circleUpperBound)));
             Circle circle3 = new Circle(AssetManager.Circle, new Vector2(10 * this.width / 8, random.Next(circleLowerBound, circleUpperBound)));
 
             circles = new Circle[] { circle1, circle2, circle3 };
+
+            foreach (Circle circle in circles)
+            {
+                circle.PlayerAttached += HandlePlayerAttached;
+            }
         }
 
         public override void OnEnd()
@@ -56,7 +71,6 @@ namespace Tangents
             }
 
             player.Update(gameTime);
-
             CheckPlayerBounds();
         }
 
@@ -65,6 +79,7 @@ namespace Tangents
             spriteBatch.Begin();
 
             spriteBatch.Draw(AssetManager.BG, new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(AssetManager.SubHeader, $"Score: {Score}", ScoreStringPos, Color.Blue, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
 
             foreach (Circle circle in circles) {
                 circle.Draw(gameTime, spriteBatch);
@@ -89,6 +104,11 @@ namespace Tangents
             {
                 circle.Position = new Vector2(width + circle.Radius + circle.Thickness, random.Next(circleLowerBound, circleUpperBound));
             }
+        }
+
+        private void HandlePlayerAttached(object sender, EventArgs eventArgs)
+        {
+            Score += 1;
         }
     }
 }
