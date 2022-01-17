@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tangents
 {
-    static class AssetManager
+    public static class AssetManager
     {
         public static Texture2D BG { get; private set; }
         public static Texture2D Circle { get; private set; }

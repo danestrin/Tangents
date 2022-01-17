@@ -41,16 +41,21 @@ namespace Tangents
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            InputManager.Update();
+
+            if (InputManager.WasKeyPressed(Keys.Escape)) {
                 Exit();
+            }
 
             gameStateManager.CurrentGameState.Update(gameTime);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             gameStateManager.CurrentGameState.Draw(gameTime, spriteBatch);
+
             base.Draw(gameTime);
         }
 

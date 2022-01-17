@@ -57,13 +57,9 @@ namespace Tangents
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newKeyState = Keyboard.GetState();
-
-            if (prevKeyState.IsKeyUp(Keys.Space) && newKeyState.IsKeyDown(Keys.Space)) {
+            if (InputManager.WasKeyPressed(Keys.Space)) {
                 player.IsOrbiting = false;
             }
-
-            prevKeyState = newKeyState;
 
             foreach (Circle circle in circles) {
                 circle.Update(gameTime, player);

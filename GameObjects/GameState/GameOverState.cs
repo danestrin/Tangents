@@ -48,17 +48,16 @@ namespace Tangents
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newKeyState = Keyboard.GetState();
-            
-            if (prevKeyState.IsKeyDown(Keys.Space) && newKeyState.IsKeyUp(Keys.Space)) {
+            // check that Space was released instead of pressed, since Space (pressed) is used in the InGame state for gameplay (leads to interference otherwise)
+            // same logic applies to Title state
+            if (InputManager.WasKeyReleased(Keys.Space)) {
                 gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame];
             }
 
-            if (prevKeyState.IsKeyDown(Keys.R) && newKeyState.IsKeyUp(Keys.R)) {
+            // uses same logic (released instead of pressed) just for consistency
+            if (InputManager.WasKeyReleased(Keys.R)) {
                 gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.Title];
             }
-
-            prevKeyState = newKeyState;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

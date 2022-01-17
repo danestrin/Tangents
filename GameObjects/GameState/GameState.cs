@@ -9,7 +9,6 @@ namespace Tangents
         protected GameStateManager gameStateManager;
         protected int width;
         protected int height;
-        protected KeyboardState prevKeyState;
 
         public abstract void OnBegin();
 

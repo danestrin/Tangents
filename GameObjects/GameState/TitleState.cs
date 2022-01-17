@@ -41,14 +41,9 @@ namespace Tangents
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newKeyState = Keyboard.GetState();
-
-            if (prevKeyState.IsKeyDown(Keys.Space) && newKeyState.IsKeyUp(Keys.Space))
-            {
+            if (InputManager.WasKeyReleased(Keys.Space)) {
                 gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame];
             }
-
-            prevKeyState = newKeyState;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
