@@ -35,8 +35,8 @@ namespace Tangents
             // the text looks best when it is positioned directly inside the squares, meaning the vertical alignment has to be (n.5)/18
             // 3/4 gives 13.5/18, and 23/36 gives 11.5/18
             // similar reasoning is used in TitleState.cs
-            this.gameOverSubPos = new Vector2(width / 2, 23 * height / 36);
-            this.returnTitlePos = new Vector2(width / 2, 3 * height / 4);
+            this.gameOverSubPos = new Vector2(width / 2, 25 * height / 36);
+            this.returnTitlePos = new Vector2(width / 2, 29 * height / 36);
         }
 
         public override void OnBegin()
