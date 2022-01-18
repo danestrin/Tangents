@@ -33,7 +33,7 @@ namespace Tangents
         {
             if (!player.IsOrbiting) {
                 if (player.AttachedCircle != this) {
-                    if (Vector2.Distance(this.Position, player.Position) <= this.Radius)
+                    if (Vector2.Distance(this.Position, player.Position) <= this.Radius + this.Thickness)
                     {
                         player.AttachedCircle = this;
                         player.IsOrbiting = true;
