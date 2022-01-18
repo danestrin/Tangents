@@ -34,7 +34,9 @@ namespace Tangents
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
             AssetManager.Load(Content);
+            ScoreManager.LoadHighScore();
 
             LoadGameStates();
         }

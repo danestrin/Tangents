@@ -15,8 +15,6 @@ namespace Tangents
         private int circleLowerBound;
         private float scoreStringHeight;
 
-        public int Score { get; private set; }
-
         public Vector2 ScoreStringPos { get; private set; }
 
         public InGameState(GameStateManager gameStateManager, int width, int height)
@@ -33,7 +31,8 @@ namespace Tangents
 
         public override void OnBegin()
         {
-            Score = 0;
+            ScoreManager.ResetScore();
+
             Circle circle1 = new Circle(AssetManager.Circle, new Vector2(this.width / 2, this.height / 2));
             player = new Player(AssetManager.Player, circle1);
 
@@ -75,7 +74,7 @@ namespace Tangents
             spriteBatch.Begin();
 
             spriteBatch.Draw(AssetManager.BG, new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(AssetManager.SubHeader, $"Score: {Score}", ScoreStringPos, Color.Blue, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(AssetManager.SubHeader, $"Score: {ScoreManager.Score}", ScoreStringPos, Color.Blue, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
 
             foreach (Circle circle in circles) {
                 circle.Draw(gameTime, spriteBatch);
@@ -104,7 +103,7 @@ namespace Tangents
 
         private void HandlePlayerAttached(object sender, EventArgs eventArgs)
         {
-            Score += 1;
+            ScoreManager.IncrementScore();
         }
     }
 }
