@@ -21,6 +21,11 @@ namespace Tangents
             Score = 0;
         }
 
+        public static void UpdateScore(int amount)
+        {
+            Score += amount;
+        }
+
         public static void CheckAndUpdateHighScore()
         {
             if (Score > HiScore) {

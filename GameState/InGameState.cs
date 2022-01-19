@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
 
 namespace Tangents
 {
@@ -103,7 +102,8 @@ namespace Tangents
 
         private void HandlePlayerAttached(object sender, EventArgs eventArgs)
         {
-            ScoreManager.IncrementScore();
+            ScoreManager.UpdateScore(player.PassedCircles.Count + 1);
+            player.PassedCircles.Clear();
         }
     }
 }
