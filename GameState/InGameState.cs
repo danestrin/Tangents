@@ -32,14 +32,14 @@ namespace Tangents
         {
             ScoreManager.ResetScore();
 
-            Circle circle1 = new Circle(AssetManager.Circle, new Vector2(this.width / 2, this.height / 2));
+            Circle circle1 = new Circle(AssetManager.Circle, width / 2, height / 2);
             player = new Player(AssetManager.Player, circle1);
 
             circleLowerBound = 0 + (int) circle1.Radius + (int) circle1.Thickness + (int) player.Radius + (int) player.Thickness;
             circleUpperBound = height - (int) circle1.Radius - (int) circle1.Thickness - (int) player.Radius - (int) player.Thickness - (int) scoreStringHeight;
 
-            Circle circle2 = new Circle(AssetManager.Circle, new Vector2(7 * this.width / 8, random.Next(circleLowerBound, circleUpperBound)));
-            Circle circle3 = new Circle(AssetManager.Circle, new Vector2(10 * this.width / 8, random.Next(circleLowerBound, circleUpperBound)));
+            Circle circle2 = new Circle(AssetManager.Circle, 7 * width / 8, random.Next(circleLowerBound, circleUpperBound));
+            Circle circle3 = new Circle(AssetManager.Circle, 10 * width / 8, random.Next(circleLowerBound, circleUpperBound));
 
             circles = new Circle[] { circle1, circle2, circle3 };
 
@@ -86,7 +86,7 @@ namespace Tangents
 
         private void CheckPlayerBounds()
         {
-            if (player.Position.X < 0 || player.Position.X > this.width || player.Position.Y < 0 || player.Position.Y > this.height)
+            if (player.X < 0 || player.X > width || player.Y < 0 || player.Y > height)
             {
                 gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.GameOver];
             }
@@ -94,9 +94,9 @@ namespace Tangents
 
         private void CheckCircleBounds(Circle circle)
         {
-            if (circle.Position.X < 0 - circle.Radius - circle.Thickness)
+            if (circle.X < 0 - circle.Radius - circle.Thickness)
             {
-                circle.Position = new Vector2(width + circle.Radius + circle.Thickness, random.Next(circleLowerBound, circleUpperBound));
+                circle.SetPosition(width + circle.Radius + circle.Thickness, random.Next(circleLowerBound, circleUpperBound));
             }
         }
 

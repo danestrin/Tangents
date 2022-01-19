@@ -20,11 +20,10 @@ namespace Tangents
         // used for scoring purposes - the player receives extra points for skipping circles (e.g. going from the first circle to the third) 
         public HashSet<Circle> PassedCircles { get; set; } = new HashSet<Circle>();
 
-        public Player(Texture2D image, Circle circle)
+        public Player(Texture2D image, Circle circle): base(image, circle.X + circle.Radius, circle.Y)
         {
-            this.image = image;
             AttachedCircle = circle;
-            Position = new Vector2(AttachedCircle.Position.X + AttachedCircle.Radius, AttachedCircle.Position.Y);
+
             IsOrbiting = true;
             speed = AttachedCircle.Radius * angularVelocity * speedConstant;
         }
@@ -34,18 +33,20 @@ namespace Tangents
             if (IsOrbiting) {
                 if (trajectory != Vector2.Zero) {
                     trajectory = Vector2.Zero;
-                    angle = (float) Math.Atan2(Position.Y - AttachedCircle.Position.Y, Position.X - AttachedCircle.Position.X);
+                    angle = (float) Math.Atan2(Y - AttachedCircle.Y, X - AttachedCircle.X);
                 }
 
                 angle += ((float) gameTime.ElapsedGameTime.TotalSeconds * angularVelocity);
-                Position = new Vector2(AttachedCircle.Position.X + AttachedCircle.Radius * (float) Math.Cos(angle), AttachedCircle.Position.Y + AttachedCircle.Radius * (float) Math.Sin(angle));
+                X = AttachedCircle.X + AttachedCircle.Radius * (float)Math.Cos(angle);
+                Y = AttachedCircle.Y + AttachedCircle.Radius * (float)Math.Sin(angle);
             } else {
                 if (trajectory == Vector2.Zero) {
-                    trajectory = Vector2.Normalize(new Vector2(Position.Y - AttachedCircle.Position.Y, Position.X - AttachedCircle.Position.X));
+                    trajectory = Vector2.Normalize(new Vector2(Y - AttachedCircle.Y, X - AttachedCircle.X));
                     TangentPoint = Position;
                 }
 
-                Position = new Vector2(Position.X - trajectory.X * (float) gameTime.ElapsedGameTime.TotalSeconds * speed, Position.Y + trajectory.Y * (float) gameTime.ElapsedGameTime.TotalSeconds * speed);
+                X -= trajectory.X * (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
+                Y += trajectory.Y * (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
             }
         }
     }

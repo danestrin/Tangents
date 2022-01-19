@@ -10,15 +10,13 @@ namespace Tangents
 
         public event EventHandler PlayerAttached;
 
-        public Circle(Texture2D image, Vector2 position)
+        public Circle(Texture2D image, float X, float Y): base(image, X, Y)
         {
-            this.image = image;
-            Position = position;
         }
 
         public void Update(GameTime gameTime, Player player)
         {
-            Position = new Vector2(Position.X - (float) gameTime.ElapsedGameTime.TotalSeconds * speed, Position.Y);
+            X -= (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
             HandleCollision(player);
         }
 
@@ -39,7 +37,7 @@ namespace Tangents
                         OnPlayerAttached();
                     } else {
                         // for scoring - add the circles that the player passes (i.e. between the player's launch point and next circle)
-                        if (Position.X > player.TangentPoint.X + Radius && Position.X < player.Position.X && player.AttachedCircle == null)
+                        if (X > player.TangentPoint.X + Radius && X < player.X && player.AttachedCircle == null)
                         {
                             player.PassedCircles.Add(this);
                         }
