@@ -6,24 +6,19 @@ namespace Tangents
 {
     public static class ScoreManager
     {
-        private static string fileName = "hiscore.txt";
+        private static readonly string fileName = "hiscore.txt";
 
         public static int Score { get; private set; } = 0;
         public static int HiScore { get; private set; } = 0;
 
-        public static void IncrementScore()
+        public static void IncrementScore(int amount)
         {
-            Score++;
+            Score += amount;
         }
 
         public static void ResetScore()
         {
             Score = 0;
-        }
-
-        public static void UpdateScore(int amount)
-        {
-            Score += amount;
         }
 
         public static void CheckAndUpdateHighScore()

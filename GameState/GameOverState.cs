@@ -6,7 +6,7 @@ namespace Tangents
 {    public class GameOverState : GameState
     {
         private string gameOverString = "GAME OVER";
-        private string gameOverSubString = "Press SPACE to play again!";
+        private string playAgainString = "Press SPACE to play again!";
         private string returnTitleString = "Press R to return to title";
         private string scoreString;
         private string hiScoreString;
@@ -26,8 +26,9 @@ namespace Tangents
             this.height = height;
 
             this.gameOverMidPoint = AssetManager.Header.MeasureString(gameOverString) / 2;
-            this.gameOverSubMidPoint = AssetManager.SubHeader.MeasureString(gameOverSubString) / 2;
+            this.gameOverSubMidPoint = AssetManager.SubHeader.MeasureString(playAgainString) / 2;
             this.returnTitleMidPoint = AssetManager.SubHeader.MeasureString(returnTitleString) / 2;
+
             this.gameOverPos = new Vector2(width / 2, height / 3);
             this.scorePos = ((InGameState) this.gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame]).ScoreStringPos;
 
@@ -73,12 +74,10 @@ namespace Tangents
             spriteBatch.Draw(AssetManager.BG, Vector2.Zero, Color.White);
 
             spriteBatch.DrawString(AssetManager.Header, gameOverString, gameOverPos, Color.Red, 0, gameOverMidPoint, 1.0f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(AssetManager.SubHeader, gameOverSubString, gameOverSubPos, Color.Red, 0, gameOverSubMidPoint, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(AssetManager.SubHeader, playAgainString, gameOverSubPos, Color.Red, 0, gameOverSubMidPoint, 1.0f, SpriteEffects.None, 0.5f);
             spriteBatch.DrawString(AssetManager.SubHeader, returnTitleString, returnTitlePos, Color.Red, 0, returnTitleMidPoint, 1.0f, SpriteEffects.None, 0.5f);
             spriteBatch.DrawString(AssetManager.SubHeader, scoreString, scorePos, Color.Red, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
             spriteBatch.DrawString(AssetManager.SubHeader, hiScoreString, hiScorePos, Color.Red, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
-
-
 
             spriteBatch.End();
         }

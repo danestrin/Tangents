@@ -25,8 +25,8 @@ namespace Tangents
             graphics.PreferredBackBufferHeight = 540;
             graphics.ApplyChanges();
 
-            this.width = graphics.PreferredBackBufferWidth;
-            this.height = graphics.PreferredBackBufferHeight;
+            width = graphics.PreferredBackBufferWidth;
+            height = graphics.PreferredBackBufferHeight;
 
             base.Initialize();
         }
@@ -63,7 +63,7 @@ namespace Tangents
 
         private void LoadGameStates()
         {
-            this.gameStateManager = GameStateManager.Instance;
+            gameStateManager = GameStateManager.Instance;
             gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.Title, new TitleState(gameStateManager, width, height));
             gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.InGame, new InGameState(gameStateManager, width, height));
             gameStateManager.GameStateMap.Add(GameStateManager.GameStateID.GameOver, new GameOverState(gameStateManager, width, height));

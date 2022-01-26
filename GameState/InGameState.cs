@@ -51,6 +51,10 @@ namespace Tangents
 
         public override void OnEnd()
         {
+            foreach (Circle circle in circles)
+            {
+                circle.PlayerAttached -= HandlePlayerAttached;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -102,7 +106,7 @@ namespace Tangents
 
         private void HandlePlayerAttached(object sender, EventArgs eventArgs)
         {
-            ScoreManager.UpdateScore(player.PassedCircles.Count + 1);
+            ScoreManager.IncrementScore(player.PassedCircles.Count + 1);
             player.PassedCircles.Clear();
         }
     }

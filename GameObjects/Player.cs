@@ -23,7 +23,6 @@ namespace Tangents
         public Player(Texture2D image, Circle circle): base(image, circle.X + circle.Radius, circle.Y)
         {
             AttachedCircle = circle;
-
             IsOrbiting = true;
             speed = AttachedCircle.Radius * angularVelocity * speedConstant;
         }
