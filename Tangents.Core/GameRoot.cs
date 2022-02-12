@@ -21,6 +21,8 @@ namespace Tangents
 
         protected override void Initialize()
         {
+            Window.Title = "Tangents";
+
             graphics.PreferredBackBufferWidth = 960;
             graphics.PreferredBackBufferHeight = 540;
             graphics.ApplyChanges();
