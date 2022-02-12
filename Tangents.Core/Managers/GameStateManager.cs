@@ -22,12 +22,12 @@ namespace Tangents
             {
                 if (currentGameState != null)
                 {
-                    this.prevGameState = currentGameState;
-                    this.prevGameState.OnEnd();
+                    prevGameState = currentGameState;
+                    prevGameState.OnEnd();
                 }
 
-                this.currentGameState = value;
-                this.currentGameState.OnBegin();
+                currentGameState = value;
+                currentGameState.OnBegin();
             }
         }
 

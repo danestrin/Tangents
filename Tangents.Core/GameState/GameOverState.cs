@@ -25,28 +25,28 @@ namespace Tangents
             this.width = width;
             this.height = height;
 
-            this.gameOverMidPoint = AssetManager.Header.MeasureString(gameOverString) / 2;
-            this.gameOverSubMidPoint = AssetManager.SubHeader.MeasureString(playAgainString) / 2;
-            this.returnTitleMidPoint = AssetManager.SubHeader.MeasureString(returnTitleString) / 2;
+            gameOverMidPoint = AssetManager.Header.MeasureString(gameOverString) / 2;
+            gameOverSubMidPoint = AssetManager.SubHeader.MeasureString(playAgainString) / 2;
+            returnTitleMidPoint = AssetManager.SubHeader.MeasureString(returnTitleString) / 2;
 
-            this.gameOverPos = new Vector2(width / 2, height / 3);
-            this.scorePos = ((InGameState) this.gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame]).ScoreStringPos;
+            gameOverPos = new Vector2(width / 2, height / 3);
+            scorePos = ((InGameState) this.gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame]).ScoreStringPos;
 
             // the background image is a square grid with 18 squares vertically
             // the text looks best when it is positioned directly inside the squares, meaning the vertical alignment has to be (n.5)/18
             // 3/4 gives 13.5/18, and 23/36 gives 11.5/18
             // similar reasoning is used in TitleState.cs
-            this.gameOverSubPos = new Vector2(width / 2, 25 * height / 36);
-            this.returnTitlePos = new Vector2(width / 2, 29 * height / 36);
+            gameOverSubPos = new Vector2(width / 2, 25 * height / 36);
+            returnTitlePos = new Vector2(width / 2, 29 * height / 36);
         }
 
         public override void OnBegin()
         {
             ScoreManager.CheckAndUpdateHighScore();
 
-            this.scoreString = $"Score: {ScoreManager.Score}";
-            this.hiScoreString = $"Hi-Score: {ScoreManager.HiScore}";
-            this.hiScorePos = new Vector2(this.width - AssetManager.SubHeader.MeasureString(hiScoreString).X - this.width / 64, 0);
+            scoreString = $"Score: {ScoreManager.Score}";
+            hiScoreString = $"Hi-Score: {ScoreManager.HiScore}";
+            hiScorePos = new Vector2(width - AssetManager.SubHeader.MeasureString(hiScoreString).X - width / 64, 0);
         }
 
         public override void OnEnd()
