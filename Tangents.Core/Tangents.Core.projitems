@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6efba8a9-a407-4029-bdd0-651d22a87386</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Tangents.Core</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Circle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameRoot.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameState\GameOverState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameState\GameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameState\InGameState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameState\TitleState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\AssetManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\GameStateManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\InputManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ScoreManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\bg.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\bg.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\circle.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\Header.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\player.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\bin\DesktopGL\Content\SubHeader.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\circle.png" />
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Header.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\.mgstats" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\bg.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\circle.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\Header.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\player.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\obj\DesktopGL\Content\SubHeader.mgcontent" />
+    <None Include="$(MSBuildThisFileDirectory)Content\player.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\SubHeader.spritefont" />
+  </ItemGroup>
+</Project>
