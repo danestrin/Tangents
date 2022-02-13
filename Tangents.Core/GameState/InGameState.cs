@@ -35,8 +35,8 @@ namespace Tangents
             Circle circle1 = new Circle(AssetManager.Circle, width / 2, height / 2);
             player = new Player(AssetManager.Player, circle1);
 
-            circleLowerBound = 0 + (int) circle1.Radius + (int) circle1.Thickness + (int) player.Radius + (int) player.Thickness;
-            circleUpperBound = height - (int) circle1.Radius - (int) circle1.Thickness - (int) player.Radius - (int) player.Thickness - (int) scoreStringHeight;
+            circleLowerBound = 0 + (int) circle1.Radius + (int) circle1.Thickness + (int) player.Radius + (int) player.Thickness + (int) scoreStringHeight;
+            circleUpperBound = height - (int) circle1.Radius - (int) circle1.Thickness - (int) player.Radius - (int) player.Thickness;
 
             Circle circle2 = new Circle(AssetManager.Circle, 7 * width / 8, random.Next(circleLowerBound, circleUpperBound));
             Circle circle3 = new Circle(AssetManager.Circle, 10 * width / 8, random.Next(circleLowerBound, circleUpperBound));
