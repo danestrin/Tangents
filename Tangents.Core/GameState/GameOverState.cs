@@ -67,9 +67,9 @@ namespace Tangents
             }
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix scaleMatrix)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: scaleMatrix);
 
             spriteBatch.Draw(AssetManager.BG, Vector2.Zero, Color.White);
 

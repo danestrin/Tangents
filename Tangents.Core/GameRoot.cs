@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Tangents
 {
@@ -8,9 +9,13 @@ namespace Tangents
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private int width;
-        private int height;
+        private readonly int width = 960;
+        private readonly int height = 540;
+        int deviceWidth;
+        int deviceHeight;
+        private Matrix scaleMatrix;
         private GameStateManager gameStateManager;
+        private PlatformID pid;
 
         public GameRoot()
         {
@@ -21,14 +26,28 @@ namespace Tangents
 
         protected override void Initialize()
         {
+            OperatingSystem os = Environment.OSVersion;
+            pid = os.Platform;
+
             Window.Title = "Tangents";
 
-            graphics.PreferredBackBufferWidth = 960;
-            graphics.PreferredBackBufferHeight = 540;
+            if (pid == PlatformID.Win32NT || pid == PlatformID.Unix || pid == PlatformID.MacOSX)
+            {
+                deviceWidth = width;
+                deviceHeight = height;
+            } else
+            {
+                deviceWidth = graphics.GraphicsDevice.DisplayMode.Width;
+                deviceHeight = graphics.GraphicsDevice.DisplayMode.Height;
+            }
+
+            graphics.PreferredBackBufferWidth = deviceWidth;
+            graphics.PreferredBackBufferHeight = deviceHeight;
             graphics.ApplyChanges();
 
-            width = graphics.PreferredBackBufferWidth;
-            height = graphics.PreferredBackBufferHeight;
+            float scaleX = (float)deviceWidth / width;
+            float scaleY = (float)deviceHeight / height;
+            scaleMatrix = Matrix.CreateScale(scaleX, scaleY, 1.0f);
 
             base.Initialize();
         }
@@ -58,7 +77,7 @@ namespace Tangents
 
         protected override void Draw(GameTime gameTime)
         {
-            gameStateManager.CurrentGameState.Draw(gameTime, spriteBatch);
+            gameStateManager.CurrentGameState.Draw(gameTime, spriteBatch, scaleMatrix);
 
             base.Draw(gameTime);
         }

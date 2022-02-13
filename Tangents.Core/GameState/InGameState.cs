@@ -72,9 +72,9 @@ namespace Tangents
             CheckPlayerBounds();
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix scaleMatrix)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: scaleMatrix);
 
             spriteBatch.Draw(AssetManager.BG, new Vector2(0, 0), Color.White);
             spriteBatch.DrawString(AssetManager.SubHeader, $"Score: {ScoreManager.Score}", ScoreStringPos, Color.Blue, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
