@@ -31,29 +31,21 @@ namespace Tangents
 
         public static void LoadHighScore()
         {
-            if (File.Exists(fileName))
-            {
-                using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication()) {
-                    using (IsolatedStorageFileStream file = new IsolatedStorageFileStream(fileName, FileMode.Open, storage)) {
-                        StreamReader reader = new StreamReader(file);
-                        HiScore = Convert.ToInt32(reader.ReadLine());
+            using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication()) {
+                using (IsolatedStorageFileStream file = new IsolatedStorageFileStream(fileName, FileMode.OpenOrCreate, storage)) {
+                    StreamReader reader = new StreamReader(file);
+                    HiScore = Convert.ToInt32(reader.ReadLine());
 
-                        reader.Close();
-                        file.Close();
-                    }
+                    reader.Close();
+                    file.Close();
                 }
-            }
-            else
-            {
-                File.Create(fileName);
-                SaveHighScore();
             }
         }
 
         private static void SaveHighScore()
         {
             using(IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication()) {
-                using (IsolatedStorageFileStream file = new IsolatedStorageFileStream(fileName, FileMode.OpenOrCreate, storage)) {
+                using (IsolatedStorageFileStream file = new IsolatedStorageFileStream(fileName, FileMode.Open, storage)) {
                     StreamWriter writer = new StreamWriter(file);
 
                     writer.WriteLine(HiScore);

@@ -45,8 +45,8 @@ namespace Tangents
             graphics.PreferredBackBufferHeight = deviceHeight;
             graphics.ApplyChanges();
 
-            float scaleX = (float)deviceWidth / width;
-            float scaleY = (float)deviceHeight / height;
+            float scaleX = (float) deviceWidth / width;
+            float scaleY = (float) deviceHeight / height;
             scaleMatrix = Matrix.CreateScale(scaleX, scaleY, 1.0f);
 
             base.Initialize();
