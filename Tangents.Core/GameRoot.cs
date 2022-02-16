@@ -18,8 +18,23 @@ namespace Tangents
         public GameRoot()
         {
             graphics = new GraphicsDeviceManager(this);
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            deviceWidth = width;
+            deviceHeight = height;
+
+            // due to a letterboxing issue on Android, this graphics code has to be done in the constructor for mobile.
+            // however, for desktopgl, it has to be done in Initialize hence the duplicated code.
+            #if __MOBILE__
+                graphics.IsFullScreen = true;
+                deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                deviceHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                graphics.PreferredBackBufferWidth = deviceWidth;
+                graphics.PreferredBackBufferHeight = deviceHeight;
+                graphics.ApplyChanges();
+            #endif
         }
 
         protected override void Initialize()
@@ -30,8 +45,8 @@ namespace Tangents
             deviceHeight = height;
 
             #if __MOBILE__
-                deviceWidth = graphics.GraphicsDevice.DisplayMode.Width;
-                deviceHeight = graphics.GraphicsDevice.DisplayMode.Height;
+                deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                deviceHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             #endif
 
             graphics.PreferredBackBufferWidth = deviceWidth;
@@ -70,6 +85,7 @@ namespace Tangents
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.White);
             gameStateManager.CurrentGameState.Draw(gameTime, spriteBatch, scaleMatrix);
 
             base.Draw(gameTime);
