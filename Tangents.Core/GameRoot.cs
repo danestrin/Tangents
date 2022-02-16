@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace Tangents
 {
@@ -15,7 +14,6 @@ namespace Tangents
         int deviceHeight;
         private Matrix scaleMatrix;
         private GameStateManager gameStateManager;
-        private PlatformID pid;
 
         public GameRoot()
         {
@@ -26,20 +24,15 @@ namespace Tangents
 
         protected override void Initialize()
         {
-            OperatingSystem os = Environment.OSVersion;
-            pid = os.Platform;
-
             Window.Title = "Tangents";
 
-            if (pid == PlatformID.Win32NT || pid == PlatformID.Unix || pid == PlatformID.MacOSX)
-            {
-                deviceWidth = width;
-                deviceHeight = height;
-            } else
-            {
+            deviceWidth = width;
+            deviceHeight = height;
+
+            #if __MOBILE__
                 deviceWidth = graphics.GraphicsDevice.DisplayMode.Width;
                 deviceHeight = graphics.GraphicsDevice.DisplayMode.Height;
-            }
+            #endif
 
             graphics.PreferredBackBufferWidth = deviceWidth;
             graphics.PreferredBackBufferHeight = deviceHeight;
