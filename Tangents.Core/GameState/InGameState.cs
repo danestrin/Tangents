@@ -59,7 +59,7 @@ namespace Tangents
 
         public override void Update(GameTime gameTime)
         {
-            if (InputManager.WasKeyPressed(Keys.Space)) {
+            if (InputManager.WasMouseClicked() || InputManager.WasScreenTouched()) {
                 player.IsOrbiting = false;
             }
 

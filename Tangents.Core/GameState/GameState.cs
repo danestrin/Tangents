@@ -10,6 +10,12 @@ namespace Tangents
         protected int width;
         protected int height;
 
+        #if __MOBILE__
+            protected static readonly string input = "Tap";
+        #else
+            protected static readonly string input = "Click";
+        #endif
+
         public abstract void OnBegin();
 
         public abstract void OnEnd();

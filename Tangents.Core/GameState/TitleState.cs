@@ -7,8 +7,8 @@ namespace Tangents
     public class TitleState : GameState
     {
         private string titleString = "TANGENTS";
-        private string subtitleString = "Press SPACE to jump from circle to circle and don't go out of bounds!";
-        private string startString = "Press SPACE to start";
+        private string subtitleString = $"{input} the screen to jump from circle to circle and don't go out of bounds!";
+        private string startString = $"{input} the screen to start";
         private string creditString = "Created by Dan Estrin - github.com/danestrin/Tangents";
         private Vector2 titleMidPoint;
         private Vector2 subtitleMidPoint;
@@ -46,7 +46,7 @@ namespace Tangents
 
         public override void Update(GameTime gameTime)
         {
-            if (InputManager.WasKeyReleased(Keys.Space)) {
+            if (InputManager.WasMouseReleased() || InputManager.WasScreenReleased()) {
                 gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame];
             }
         }
