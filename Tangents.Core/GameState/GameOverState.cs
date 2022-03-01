@@ -7,14 +7,11 @@ namespace Tangents
     {
         private string gameOverString = "GAME OVER";
         private string playAgainString = $"{input} to play again!";
-        private string scoreString;
-        private string hiScoreString;
-        private Vector2 gameOverMidPoint;
-        private Vector2 gameOverSubMidPoint;
-        private Vector2 gameOverPos;
-        private Vector2 gameOverSubPos;
-        private Vector2 scorePos;
-        private Vector2 hiScorePos;
+        private string hiScoreString = $"Hi-Score: {ScoreManager.HiScore}";
+        private GameText gameOver;
+        private GameText playAgain;
+        private GameText score;
+        private GameText hiScore;
 
         public GameOverState(GameStateManager gameStateManager, int width, int height)
         {
@@ -22,26 +19,27 @@ namespace Tangents
             this.width = width;
             this.height = height;
 
-            gameOverMidPoint = AssetManager.Header.MeasureString(gameOverString) / 2;
-            gameOverSubMidPoint = AssetManager.SubHeader.MeasureString(playAgainString) / 2;
-
-            gameOverPos = new Vector2(width / 2, height / 3);
-            scorePos = ((InGameState) this.gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame]).ScoreStringPos;
-
             // the background image is a square grid with 18 squares vertically
             // the text looks best when it is positioned directly inside the squares, meaning the vertical alignment has to be (n.5)/18
-            // 3/4 gives 13.5/18, and 23/36 gives 11.5/18
+            // e.g. 25/36 gives 12.5/18
             // similar reasoning is used in TitleState.cs
-            gameOverSubPos = new Vector2(width / 2, 25 * height / 36);
+            gameOver = new GameText(AssetManager.Header, gameOverString, new Vector2(width / 2, height / 3), Color.Red, true);
+            playAgain = new GameText(AssetManager.SubHeader, playAgainString, new Vector2(width / 2, 25 * height / 36), Color.Red, true);
+
+            score = ((InGameState) this.gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame]).Score;
+
+            hiScore = new GameText(AssetManager.SubHeader, hiScoreString, new Vector2(width - AssetManager.SubHeader.MeasureString(hiScoreString).X - width / 64, 0), Color.Red, false);
         }
 
         public override void OnBegin()
         {
             ScoreManager.CheckAndUpdateHighScore();
 
-            scoreString = $"Score: {ScoreManager.Score}";
-            hiScoreString = $"Hi-Score: {ScoreManager.HiScore}";
-            hiScorePos = new Vector2(width - AssetManager.SubHeader.MeasureString(hiScoreString).X - width / 64, 0);
+            score.Text = $"Score: {ScoreManager.Score}";
+            score.Color = Color.Red;
+
+            hiScore.Text = $"Hi-Score: {ScoreManager.HiScore}";
+            hiScore.Position = new Vector2(width - hiScore.Size.X - width / 64, 0);
         }
 
         public override void OnEnd()
@@ -63,10 +61,10 @@ namespace Tangents
 
             spriteBatch.Draw(AssetManager.BG, Vector2.Zero, Color.White);
 
-            spriteBatch.DrawString(AssetManager.Header, gameOverString, gameOverPos, Color.Red, 0, gameOverMidPoint, 1.0f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(AssetManager.SubHeader, playAgainString, gameOverSubPos, Color.Red, 0, gameOverSubMidPoint, 1.0f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(AssetManager.SubHeader, scoreString, scorePos, Color.Red, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(AssetManager.SubHeader, hiScoreString, hiScorePos, Color.Red, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
+            gameOver.Draw(spriteBatch);
+            playAgain.Draw(spriteBatch);
+            score.Draw(spriteBatch);
+            hiScore.Draw(spriteBatch);
 
             spriteBatch.End();
         }

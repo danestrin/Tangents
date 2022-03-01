@@ -12,9 +12,9 @@ namespace Tangents
         private Random random;
         private int circleUpperBound;
         private int circleLowerBound;
-        private float scoreStringHeight;
+        private string scoreString = $"Score: {ScoreManager.Score}";
 
-        public Vector2 ScoreStringPos { get; private set; }
+        public GameText Score;
 
         public InGameState(GameStateManager gameStateManager, int width, int height)
         {
@@ -22,8 +22,7 @@ namespace Tangents
             this.height = height;
             this.gameStateManager = gameStateManager;
 
-            ScoreStringPos = new Vector2(this.width / 64, 0);
-            scoreStringHeight = AssetManager.SubHeader.MeasureString("Score").Y;
+            Score = new GameText(AssetManager.SubHeader, scoreString, new Vector2(this.width / 64, 0), Color.Blue, false);
 
             random = new Random();
         }
@@ -31,11 +30,13 @@ namespace Tangents
         public override void OnBegin()
         {
             ScoreManager.ResetScore();
+            Score.Text = $"Score: {ScoreManager.Score}";
+            Score.Color = Color.Blue;
 
             Circle circle1 = new Circle(AssetManager.Circle, width / 2, height / 2);
             player = new Player(AssetManager.Player, circle1);
 
-            circleLowerBound = 0 + (int) circle1.Radius + (int) circle1.Thickness + (int) player.Radius + (int) player.Thickness + (int) scoreStringHeight;
+            circleLowerBound = 0 + (int) circle1.Radius + (int) circle1.Thickness + (int) player.Radius + (int) player.Thickness + (int) Score.Size.Y;
             circleUpperBound = height - (int) circle1.Radius - (int) circle1.Thickness - (int) player.Radius - (int) player.Thickness;
 
             Circle circle2 = new Circle(AssetManager.Circle, 7 * width / 8, random.Next(circleLowerBound, circleUpperBound));
@@ -77,7 +78,7 @@ namespace Tangents
             spriteBatch.Begin(transformMatrix: scaleMatrix);
 
             spriteBatch.Draw(AssetManager.BG, new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(AssetManager.SubHeader, $"Score: {ScoreManager.Score}", ScoreStringPos, Color.Blue, 0, Vector2.Zero, 1.0f, SpriteEffects.None, 0.5f);
+            Score.Draw(spriteBatch);
 
             foreach (Circle circle in circles) {
                 circle.Draw(gameTime, spriteBatch);
@@ -107,6 +108,7 @@ namespace Tangents
         private void HandlePlayerAttached(object sender, EventArgs eventArgs)
         {
             ScoreManager.IncrementScore(player.PassedCircles.Count + 1);
+            Score.Text = $"Score: {ScoreManager.Score}";
             player.PassedCircles.Clear();
         }
     }
