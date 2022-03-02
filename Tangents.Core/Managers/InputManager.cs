@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Tangents
@@ -49,6 +50,37 @@ namespace Tangents
         public static bool WasMouseReleased()
         {
             return prevMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released;
+        }
+
+        public static bool WasTextReleased(GameText text, Matrix scaleMatrix)
+        {
+            if (WasMouseReleased()) {
+                return CheckCollision(prevMouseState.Position.ToVector2(), text);
+            }
+
+            if (WasScreenReleased()) {
+                Vector2 scaleVector = new Vector2(scaleMatrix.M11, scaleMatrix.M22);
+                TouchCollection.Enumerator touches = prevTouchState.GetEnumerator();
+
+                while (touches.MoveNext()) {
+                    if (CheckCollision(touches.Current.Position / scaleVector, text)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private static bool CheckCollision(Vector2 point, GameText text)
+        {
+            if (text.Centered) {
+                float textX = text.Position.X - text.Midpoint.X;
+                float textY = text.Position.Y - text.Midpoint.Y;
+                return point.X >= textX && point.X <= textX + text.Size.X && point.Y >= textY && point.Y <= textY + text.Size.Y;
+            } else {
+                return point.X >= text.Position.X && point.X <= text.Position.X + text.Size.X && point.Y >= text.Position.Y && point.Y <= text.Position.Y + text.Size.Y;
+            }
         }
     }
 }

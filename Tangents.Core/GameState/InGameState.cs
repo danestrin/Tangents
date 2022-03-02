@@ -58,7 +58,7 @@ namespace Tangents
             }
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Matrix scaleMatrix)
         {
             if (InputManager.WasMouseClicked() || InputManager.WasScreenTouched()) {
                 player.IsOrbiting = false;

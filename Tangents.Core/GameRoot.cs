@@ -78,7 +78,7 @@ namespace Tangents
                 Exit();
             }
 
-            gameStateManager.CurrentGameState.Update(gameTime);
+            gameStateManager.CurrentGameState.Update(gameTime, scaleMatrix);
 
             base.Update(gameTime);
         }

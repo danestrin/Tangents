@@ -20,7 +20,7 @@ namespace Tangents
 
         public abstract void OnEnd();
 
-        public abstract void Update(GameTime gameTime);
+        public abstract void Update(GameTime gameTime, Matrix scaleMatrix);
 
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix scaleMatrix);
     }

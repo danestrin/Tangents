@@ -5,9 +5,8 @@ namespace Tangents
 {
     public class GameText
     {
-        private bool centered;
-
         public SpriteFont Font { get; private set; }
+        public bool Centered { get; private set; }
         public string Text { get; set; }
         public Vector2 Position { get; set; }
         public Color Color { get; set; }
@@ -30,7 +29,7 @@ namespace Tangents
 
         public GameText(SpriteFont font, string text, Vector2 position, Color color, bool centered)
         {
-            this.centered = centered;
+            Centered = centered;
             Font = font;
             Text = text;
             Position = position;
@@ -39,7 +38,7 @@ namespace Tangents
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (centered) {
+            if (Centered) {
                 spriteBatch.DrawString(Font, Text, Position, Color, 0, Midpoint, 1.0f, SpriteEffects.None, 0.5f);
             }
             else {

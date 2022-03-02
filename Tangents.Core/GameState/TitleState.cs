@@ -9,7 +9,7 @@ namespace Tangents
     {
         private string titleString = "TANGENTS";
         private string instructionString = $"{input} the screen to jump from circle to circle and don't go out of bounds!";
-        private string startString = $"{input} the screen to start";
+        private string startString = $"{input} here to start";
         private string creditString = "Created by Dan Estrin - github.com/danestrin/Tangents";
         private GameText title;
         private GameText instruction;
@@ -36,9 +36,9 @@ namespace Tangents
         {
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Matrix scaleMatrix)
         {
-            if (InputManager.WasMouseReleased() || InputManager.WasScreenReleased()) {
+            if (InputManager.WasTextReleased(start, scaleMatrix)) {
                 gameStateManager.CurrentGameState = gameStateManager.GameStateMap[GameStateManager.GameStateID.InGame];
             }
         }
