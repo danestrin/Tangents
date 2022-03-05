@@ -11,13 +11,13 @@ with.
     <!--
     Modify this string to change the font that will be imported.
     -->
-    <FontName>Segoe Print Bold</FontName>
+    <FontName>Caveat-Bold</FontName>
 
     <!--
     Size is a float value, measured in points. Modify this value to change
     the size of the font.
     -->
-    <Size>72</Size>
+    <Size>96</Size>
 
     <!--
     Spacing is a float value, measured in pixels. Modify this value to change
