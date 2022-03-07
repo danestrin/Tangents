@@ -74,10 +74,6 @@ namespace Tangents
         {
             InputManager.Update();
 
-            if (InputManager.WasKeyPressed(Keys.Escape)) {
-                Exit();
-            }
-
             gameStateManager.CurrentGameState.Update(gameTime, scaleMatrix);
 
             base.Update(gameTime);
