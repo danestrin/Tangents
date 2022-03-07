@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Tangents.iOS</string>
+	<string>Tangents</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>GameThumbnail.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>project.MonoGame.Tangents.iOS</string>
+	<string>com.danestrin.Tangents</string>
 	<key>MinimumOSVersion</key>
 	<string>7.0</string>
 	<key>UISupportedInterfaceOrientations</key>
@@ -18,7 +18,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>Tangents.iOS</string>
+	<string>Tangents</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

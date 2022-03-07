@@ -55,6 +55,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>iOS Team Provisioning Profile: com.danestrin.Tangents</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
